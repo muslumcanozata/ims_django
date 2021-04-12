@@ -13,7 +13,7 @@ class sarfKullanicilarM(models.Model):
     isim = models.CharField(verbose_name='İsim', max_length=length, null=False, blank=False)
     soyisim = models.CharField(verbose_name='Soyisim', max_length=length, null=False, blank=False)
     tel = models.CharField(verbose_name='Telefon (5012345678)', max_length=phoneLength, unique=True, null=False, blank=False)
-    ds = models.CharField(verbose_name='Not', max_length=textLength)
+    ds = models.CharField(verbose_name='Not', max_length=textLength, blank=True)
 
     def __str__(self):
         return self.isim + " " + self.soyisim
