@@ -1,6 +1,6 @@
 from django.contrib import admin
 from ims.models import (
-    sarfKullanicilarM, personellerM
+    sarfKullanicilarM, personellerM, mudurlukM
 )
 
 # Register your models here.
@@ -21,4 +21,13 @@ class personellerMAdmin(admin.ModelAdmin):
     )
     list_display = (
         'isno', 'isim', 'soyisim', 'email', 'tel', 'mudurluk', 'ilkamirlik'
+    )
+
+@admin.register(mudurlukM)
+class mudurlukM(admin.ModelAdmin):
+    search_fields = (
+        'mudurluk', 'ds'
+        )
+    list_display = (
+        'ds', 'mudurluk'
     )
