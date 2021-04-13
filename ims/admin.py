@@ -1,6 +1,6 @@
 from django.contrib import admin
 from ims.models import (
-    sarfKullanicilarM, personellerM, mudurlukM, butceKoduM
+    sarfKullanicilarM, personellerM, mudurlukM, butceKoduM, skuM
 )
 
 # Register your models here.
@@ -39,4 +39,13 @@ class butceKoduM(admin.ModelAdmin):
         )
     list_display = (
         'kod','mudurluk', 'euro', 'ds'
+    )
+
+@admin.register(skuM)
+class skuM(admin.ModelAdmin):
+    search_fields = (
+        'sku', 'ds'
+        )
+    list_display = (
+        'sku', 'ds'
     )
