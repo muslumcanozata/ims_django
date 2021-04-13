@@ -26,7 +26,7 @@ class personellerM(models.Model):
     ds = models.CharField(verbose_name='Not', max_length=textLength, blank=True, null=True)
 
     def __str__(self):
-        return self.isim + " " + self.soyisim
+        return str(self.isno)
 
     class Meta:
         db_table = "Personeller"

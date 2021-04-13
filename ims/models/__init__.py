@@ -5,3 +5,4 @@ from .butceKoduM import butceKoduM
 from .skuM import skuM
 from .istihkakM import istihkakM
 from .fiyatM import fiyatM
+from .bedenlerM import bedenlerM
