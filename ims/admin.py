@@ -1,6 +1,6 @@
 from django.contrib import admin
 from ims.models import (
-    sarfKullanicilarM, personellerM, mudurlukM, butceKoduM, skuM, istihkakM
+    sarfKullanicilarM, personellerM, mudurlukM, butceKoduM, skuM, istihkakM, fiyatM
 )
 
 # Register your models here.
@@ -57,4 +57,13 @@ class istihkakM(admin.ModelAdmin):
         )
     list_display = (
         'grup', 'ds'
+    )
+
+@admin.register(fiyatM)
+class fiyatM(admin.ModelAdmin):
+    search_fields = (
+        'sku', 'euro', 'ds'
+        )
+    list_display = (
+        'sku', 'euro', 'ds'
     )
