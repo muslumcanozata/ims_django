@@ -11,7 +11,7 @@ class butceKoduM(models.Model):
     ds = models.CharField(verbose_name='Tanım', max_length=textLength, blank=True)
 
     def __str__(self):
-        return self.kod
+        return str(self.kod)
     
     class Meta:
         db_table = "Bütçe Kodları"
