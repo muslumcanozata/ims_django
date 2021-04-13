@@ -8,3 +8,4 @@ from .fiyatM import fiyatM
 from .bedenlerM import bedenlerM
 from .urunlerGrupM import urunlerGrupM
 from .urunHareketlerM import urunHareketlerM
+from .istihkaklarGrupM import istihkaklarGrupM

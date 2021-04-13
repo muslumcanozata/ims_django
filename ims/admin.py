@@ -1,6 +1,6 @@
 from django.contrib import admin
 from ims.models import (
-    sarfKullanicilarM, personellerM, mudurlukM, butceKoduM, skuM, istihkakM, fiyatM, bedenlerM, urunlerGrupM, urunHareketlerM
+    sarfKullanicilarM, personellerM, mudurlukM, butceKoduM, skuM, istihkakM, fiyatM, bedenlerM, urunlerGrupM, urunHareketlerM, istihkaklarGrupM
 )
 
 # Register your models here.
@@ -24,7 +24,7 @@ class personellerMAdmin(admin.ModelAdmin):
     )
 
 @admin.register(mudurlukM)
-class mudurlukM(admin.ModelAdmin):
+class mudurlukMAdmin(admin.ModelAdmin):
     search_fields = (
         'mudurluk', 'ds'
         )
@@ -33,7 +33,7 @@ class mudurlukM(admin.ModelAdmin):
     )
 
 @admin.register(butceKoduM)
-class butceKoduM(admin.ModelAdmin):
+class butceKoduMAdmin(admin.ModelAdmin):
     search_fields = (
         'kod','mudurluk', 'ds'
         )
@@ -42,7 +42,7 @@ class butceKoduM(admin.ModelAdmin):
     )
 
 @admin.register(skuM)
-class skuM(admin.ModelAdmin):
+class skuMAdmin(admin.ModelAdmin):
     search_fields = (
         'sku', 'ds'
         )
@@ -51,7 +51,7 @@ class skuM(admin.ModelAdmin):
     )
 
 @admin.register(istihkakM)
-class istihkakM(admin.ModelAdmin):
+class istihkakMAdmin(admin.ModelAdmin):
     search_fields = (
         'grup', 'ds'
         )
@@ -60,7 +60,7 @@ class istihkakM(admin.ModelAdmin):
     )
 
 @admin.register(fiyatM)
-class fiyatM(admin.ModelAdmin):
+class fiyatMAdmin(admin.ModelAdmin):
     search_fields = (
         'sku', 'euro', 'ds'
         )
@@ -69,7 +69,7 @@ class fiyatM(admin.ModelAdmin):
     )
 
 @admin.register(bedenlerM)
-class bedenlerM(admin.ModelAdmin):
+class bedenlerMAdmin(admin.ModelAdmin):
     search_fields = (
         'isno', 'grup', 'beden'
         )
@@ -78,7 +78,7 @@ class bedenlerM(admin.ModelAdmin):
     )
 
 @admin.register(urunlerGrupM)
-class urunlerGrupM(admin.ModelAdmin):
+class urunlerGrupMAdmin(admin.ModelAdmin):
     search_fields = (
         'isim', 'sku'
         )
@@ -87,10 +87,19 @@ class urunlerGrupM(admin.ModelAdmin):
     )
 
 @admin.register(urunHareketlerM)
-class urunHareketlerM(admin.ModelAdmin):
+class urunHareketlerMAdmin(admin.ModelAdmin):
     search_fields = (
         'per_isno', 'tarih', 'urun_id'
         )
     list_display = (
         'per_isno', 'tarih', 'urun_id', 'verilenadet', 'istenilenadet', 'urun_id'
+    )
+
+@admin.register(istihkaklarGrupM)
+class istihkaklarGrupMAdmin(admin.ModelAdmin):
+    search_fields = (
+        'sku', 'grup', 'beden', 'cinsiyet', 'frekans', 'mudurluk'
+    )
+    list_display = (
+        'sku', 'grup', 'beden', 'cinsiyet', 'frekans', 'mudurluk', 'ds'
     )
