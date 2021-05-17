@@ -6,6 +6,10 @@ name = "pypi"
 [packages]
 django = "==3.2"
 mysqlclient = "*"
+djangorestframework-jwt = "*"
+djangorestframework = "*"
+django-cors-headers = "*"
+db-sqlite3 = "*"
 
 [dev-packages]
 
