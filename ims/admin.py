@@ -17,7 +17,7 @@ class sarfKullanicilarMAdmin(admin.ModelAdmin):
 @admin.register(personellerM)
 class personellerMAdmin(admin.ModelAdmin):
     search_fields = (
-        'isno', 'isim', 'soyisim', 'email', 'tel', 'rfid', 'mudurluk', 'ilkamirlik', 'grup'
+        'rfid2',
     )
     list_display = (
         'isno', 'isim', 'soyisim', 'email', 'tel', 'mudurluk', 'ilkamirlik'

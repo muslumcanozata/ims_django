@@ -18,7 +18,7 @@ class personellerM(models.Model):
     isim = models.CharField(verbose_name='İsim', max_length=length, null=False, blank=False)
     soyisim = models.CharField(verbose_name='Soyisim', max_length=length, null=False, blank=False)
     tel = models.CharField(verbose_name='Telefon (5012345678)', max_length=phoneLength, unique=True, null=False, blank=False)
-    #rfid2 = models.CharField(max_length=12, verbose_name='rfid2', null=True)
+    rfid2 = models.CharField(max_length=12, verbose_name='rfid2', null=True)
     rfid = models.BigIntegerField(verbose_name = "RFID", validators=[MaxValueValidator(99999999999), MinValueValidator(1)], null=False, blank=False)
     mudurluk = models.IntegerField(verbose_name='Müdürlük', unique= True, validators=[MaxValueValidator(100), MinValueValidator(1)], null=False, blank=False)
     ilkamirlik = models.CharField(verbose_name='İlk Amirlik', unique= True, max_length=length, null=False, blank=False)
