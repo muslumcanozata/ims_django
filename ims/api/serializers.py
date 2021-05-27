@@ -1,12 +1,18 @@
 from rest_framework import serializers
 from django.contrib.auth.models import User
 from rest_framework_jwt.settings import api_settings
-from ims.models import sarfKullanicilarM
+from ims.models import sarfKullanicilarM, personellerM
 
 class sarfKullanicilarSerializer(serializers.ModelSerializer):
     
     class Meta:
         model = sarfKullanicilarM
+        fields = '__all__'
+
+class personellerSerializer(serializers.ModelSerializer):
+    
+    class Meta:
+        model = personellerM
         fields = '__all__'
 
 class userSerializer(serializers.ModelSerializer):
