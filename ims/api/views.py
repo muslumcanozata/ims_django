@@ -63,10 +63,15 @@ class personellerListCreateAPIView(APIView):
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 
-class personellerDetailsListCreateAPIView(generics.RetrieveUpdateAPIView):
+class personellerRFDetailsListCreateAPIView(generics.RetrieveUpdateAPIView):
     queryset = personellerM.objects.all()
     serializer_class = personellerSerializer
     lookup_field = 'rfid2'
+
+class personellerQRDetailsListCreateAPIView(generics.RetrieveUpdateAPIView):
+    queryset = personellerM.objects.all()
+    serializer_class = personellerSerializer
+    lookup_field = 'tel2'
 
 
 
