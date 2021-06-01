@@ -12,6 +12,9 @@ from rest_framework.views import APIView
 from rest_framework.generics import get_object_or_404
 
 
+#face detect
+from ims.FACE_DETECT.deepface2.DeepFace import stream
+from django.http import HttpResponse
 
 
 class sarfKullanicilarListCreateAPIView(APIView):
@@ -63,3 +66,27 @@ class userList(APIView):
             serializer.save()
             return Response(serializer.data, status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+
+@api_view(['GET'])
+def Home(request):
+    try:
+        cam = VideoCamera() 
+        result = gen(cam)
+    except:
+        result = "None"
+        pass
+    return HttpResponse(result)
+
+
+class VideoCamera(object):
+    
+    def get_frame(object):
+        result = stream("ims/FACE_DETECT/FaceImages",model_name ='Dlib',time_threshold = 1, frame_threshold = 5)
+        print(result,"Kisisi tespit edildi")
+        return result
+
+
+def gen(cam):
+    return cam.get_frame()
+        
