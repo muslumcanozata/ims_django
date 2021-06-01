@@ -80,10 +80,10 @@ class bedenlerMAdmin(admin.ModelAdmin):
 @admin.register(urunlerGrupM)
 class urunlerGrupMAdmin(admin.ModelAdmin):
     search_fields = (
-        'isim', 'sku'
+        'isim',
         )
     list_display = (
-        'isim', 'grup', 'sku', 'istihkak'
+        'isim', 'grup', 'istihkak', 'frekans', 'mudurluk',
     )
 
 @admin.register(urunHareketlerM)
@@ -101,5 +101,5 @@ class istihkaklarGrupMAdmin(admin.ModelAdmin):
         'sku', 'grup', 'beden', 'cinsiyet', 'frekans', 'mudurluk'
     )
     list_display = (
-        'sku', 'grup', 'beden', 'cinsiyet', 'frekans', 'mudurluk', 'ds'
+        'sku', 'grup', 'urunGrup', 'beden', 'cinsiyet', 'frekans', 'mudurluk', 'ds'
     )
