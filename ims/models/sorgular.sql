@@ -60,7 +60,7 @@ where (mudurluk, grup) In ( select mudurluk, grup
 
 -- kullanıcının alabileceği ürünler (adet bakılmaksızın) / (selectlerin düzelmiş hali)
  
-select ug.id, ug.isim, ug.istihkak, i.ds, m.ds
+select ug.id, ug.isim, ug.istihkak, i.i_isim, m.m_isim
 from 'ÜrünlerGrup Bilgileri' as ug
 inner join İstihkak as i on i.grup = ug.grup
 inner join Müdürlükler m on m.mudurluk = ug.mudurluk

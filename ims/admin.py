@@ -26,10 +26,10 @@ class personellerMAdmin(admin.ModelAdmin):
 @admin.register(mudurlukM)
 class mudurlukMAdmin(admin.ModelAdmin):
     search_fields = (
-        'mudurluk', 'ds'
+        'mudurluk', 'm_isim'
         )
     list_display = (
-        'ds', 'mudurluk'
+        'm_isim', 'mudurluk'
     )
 
 @admin.register(butceKoduM)
@@ -53,10 +53,10 @@ class skuMAdmin(admin.ModelAdmin):
 @admin.register(istihkakM)
 class istihkakMAdmin(admin.ModelAdmin):
     search_fields = (
-        'grup', 'ds'
+        'grup', 'i_isim'
         )
     list_display = (
-        'grup', 'ds'
+        'grup', 'i_isim'
     )
 
 @admin.register(fiyatM)
@@ -83,7 +83,7 @@ class urunlerGrupMAdmin(admin.ModelAdmin):
         'isim',
         )
     list_display = (
-        'isim', 'grup', 'istihkak', 'frekans', 'mudurluk',
+        'isim', 'grup', 'istihkak', 'frekans', 'mudurluk', 'adet',
     )
 
 @admin.register(urunHareketlerM)
