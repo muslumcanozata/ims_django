@@ -11,6 +11,5 @@ urlpatterns = [
     path('urunTeslim/', api_views.urunTeslimViews.as_view(), name="Alınabilecek Ürün Bilgileri"),
     path('urunHareketler/', api_views.urunHareketListCreateAPIView.as_view(), name="Personel Bilgileri"),
     path('current_user/', current_user),
-    path('current_user/', current_user),
     path('users/', userList.as_view())
 ]
