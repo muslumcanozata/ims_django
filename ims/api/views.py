@@ -1,3 +1,6 @@
+from ims.models.urunHareketlerM import urunHareketlerM
+from ims.models.urunlerGrupM import urunlerGrupM
+from ims.models.personellerM import personellerM
 from django.http import HttpResponseRedirect
 from rest_framework import permissions, status
 from rest_framework.decorators import api_view
@@ -5,7 +8,10 @@ from rest_framework.response import Response
 from rest_framework.serializers import Serializer
 from django.contrib.auth.models import User
 from ims.models import sarfKullanicilarM
-from ims.api.serializers import sarfKullanicilarSerializer, userSerializer, userSerializerWithToken
+from ims.api.serializers import personellerSerializer, sarfKullanicilarSerializer, urunHareketSerializer, urunlerGrupSerializer, userSerializer, userSerializerWithToken
+#genericsAPIView
+from rest_framework.generics import GenericAPIView
+from rest_framework import generics
 
 #for class views
 from rest_framework.views import APIView
@@ -15,6 +21,8 @@ from rest_framework.generics import get_object_or_404
 #face detect
 from ims.FACE_DETECT.deepface2.DeepFace import stream
 from django.http import HttpResponse
+
+from django.db import connection
 
 
 class sarfKullanicilarListCreateAPIView(APIView):
@@ -49,6 +57,33 @@ class sarfKullanicilarDetailsListCreateAPIView(APIView):
             return Response(serializer.data)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
+
+class personellerListCreateAPIView(APIView):
+    def get(self, request):
+        personeller = personellerM.objects.all()
+        serializer = personellerSerializer(personeller, many=True)
+        return Response(serializer.data)
+    
+    def post(self, request):
+        serializer = personellerSerializer(data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+
+class personellerRFDetailsListCreateAPIView(generics.RetrieveUpdateAPIView):
+    queryset = personellerM.objects.all()
+    serializer_class = personellerSerializer
+    lookup_field = 'rfid2'
+
+class personellerQRDetailsListCreateAPIView(generics.RetrieveUpdateAPIView):
+    queryset = personellerM.objects.all()
+    serializer_class = personellerSerializer
+    lookup_field = 'tel2'
+
+
+
 #for login authentication
 @api_view(['GET'])
 def current_user(request):
@@ -67,6 +102,7 @@ class userList(APIView):
             return Response(serializer.data, status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
+#face_detect#
 
 @api_view(['GET'])
 def Home(request):
@@ -89,4 +125,28 @@ class VideoCamera(object):
 
 def gen(cam):
     return cam.get_frame()
-        
+ #face_detect#   
+
+class urunTeslimViews(APIView):
+
+    def get(self, request):
+        cursor = connection.cursor()
+        raw_query = '''select ug.id, ug.isim, ug.adet
+                    from 'ÜrünlerGrup Bilgileri' as ug
+                    left join 'Ürün Hareketleri' as uh on ug.id = uh.urun_id_id
+                            and uh.id = (
+                                    select uhs.id 
+                                    from 'Ürün Hareketleri' as uhs 
+                                    where uhs.urun_id_id = uh.urun_id_id and uhs.per_isno_id = 22222
+                                    order by uhs.tarih desc
+                                    limit 1)
+                    where (ug.mudurluk, ug.grup) In ( select mudurluk, grup
+                                                from Personeller  
+                                                where isno = 22222)
+                            and (uh.per_isno_id is null
+                            or ug.frekans <= cast(julianday('now') - julianday(uh.tarih) as integer))'''
+        return Response(cursor.execute(raw_query))
+
+class urunHareketListCreateAPIView(generics.ListCreateAPIView):
+    queryset = urunHareketlerM.objects.all()
+    serializer_class = urunHareketSerializer

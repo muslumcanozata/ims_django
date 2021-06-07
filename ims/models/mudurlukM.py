@@ -6,9 +6,9 @@ textLength = 255
 
 class mudurlukM(models.Model):
     mudurluk = models.IntegerField(verbose_name='Müdürlük No', unique= True, validators=[MinValueValidator(1), MaxValueValidator(100)], null=False, blank=False)
-    ds = models.CharField(verbose_name='Müdürlük İsmi', max_length=textLength, unique = True, null=False, blank = False)
+    m_isim = models.CharField(verbose_name='Müdürlük İsmi', max_length=textLength, unique = True, null=False, blank = False)
     def __str__(self):
-        return self.ds
+        return self.m_isim
     
     class Meta:
         db_table = "Müdürlükler"
