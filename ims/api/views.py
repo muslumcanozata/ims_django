@@ -70,13 +70,13 @@ class userList(APIView):
 
 @api_view(['GET'])
 def Home(request):
-    try:
-        cam = VideoCamera() 
-        result = gen(cam)
-    except:
-        result = "None"
-        pass
-    return HttpResponse(result)
+    # try:
+    #     cam = VideoCamera() 
+    #     result = gen(cam)
+    # except:
+    #     result = "None"
+    #     pass
+    return HttpResponse("123")
 
 
 class VideoCamera(object):
