@@ -10,6 +10,12 @@ djangorestframework-jwt = "*"
 djangorestframework = "*"
 django-cors-headers = "*"
 db-sqlite3 = "*"
+numpy = "*"
+pandas = "*"
+tqdm = "*"
+gdown = "*"
+tensorflow = "*"
+deepface = "*"
 
 [dev-packages]
 
