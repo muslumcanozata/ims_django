@@ -122,7 +122,7 @@ def Home(request):
     # except:
     #     result = "None"
     #     pass
-    return JsonResponse({'isno':11111})
+    return JsonResponse({'isno':22222})
 
 
 class VideoCamera(object):
