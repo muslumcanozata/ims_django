@@ -1,6 +1,6 @@
 from django.urls import path
 from ims.api import views as api_views
-from .views import urunHareketListCreateAPIView, current_user, personellerRFDetailsListCreateAPIView, personellerQRDetailsListCreateAPIView, personellerFaceDetailsListCreateAPIView, personellerListCreateAPIView, userList, Home
+from .views import urunHareketListCreateAPIView, current_user, personellerRFDetailsListCreateAPIView, personellerQRDetailsListCreateAPIView, personellerFaceDetailsListCreateAPIView, personellerListCreateAPIView, userList, Home, FaceDetect
 
 
 urlpatterns = [
@@ -15,5 +15,6 @@ urlpatterns = [
     path('urunHareketler/', api_views.urunHareketListCreateAPIView.as_view(), name="Personel Bilgileri"),
     path('current_user/', current_user),
     path('users/', userList.as_view()),
-    path('face_detect/', Home)
+    path('face_detect/', Home),
+    path('user_face_detect/', FaceDetect)
 ]

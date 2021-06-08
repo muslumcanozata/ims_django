@@ -2,8 +2,8 @@ import cv2
 import os
 
 
-face_cascade=cv2.CascadeClassifier("D:\\FACE_DETECT\\frontalface.xml")
-path = 'FaceImages'
+face_cascade=cv2.CascadeClassifier("ims/FACE_DETECT/frontalface.xml")
+path = 'ims/FACE_DETECT/FaceImages'
 
 
 def create_folder(user):
@@ -64,11 +64,14 @@ def get_face_images(username):
         
     cap.release()
     cv2.destroyAllWindows()
+    return True
     
     
-username = input("Enter username: ")
-result = create_folder(username)
+def face_detect(username):
+    result = create_folder(username)
 
-if(result == True):
-    get_face_images(username);
+    if(result == True):
+        return get_face_images(username)
+
+
     
