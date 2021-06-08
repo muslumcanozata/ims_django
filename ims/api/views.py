@@ -25,6 +25,11 @@ from django.http import HttpResponse
 from django.db import connection
 
 
+from django.http import JsonResponse
+
+
+
+
 class sarfKullanicilarListCreateAPIView(APIView):
     def get(self, request):
         sarfKullanicilar = sarfKullanicilarM.objects.all()
@@ -82,6 +87,11 @@ class personellerQRDetailsListCreateAPIView(generics.RetrieveUpdateAPIView):
     serializer_class = personellerSerializer
     lookup_field = 'tel2'
 
+class personellerFaceDetailsListCreateAPIView(generics.RetrieveUpdateAPIView):
+    queryset = personellerM.objects.all()
+    serializer_class = personellerSerializer
+    lookup_field = 'isno'
+
 
 
 #for login authentication
@@ -112,7 +122,7 @@ def Home(request):
     # except:
     #     result = "None"
     #     pass
-    return HttpResponse("123")
+    return JsonResponse({'isno':11111})
 
 
 class VideoCamera(object):
@@ -130,6 +140,8 @@ def gen(cam):
 class urunTeslimViews(APIView):
 
     def get(self, request):
+        print(request.GET.get('isno'))
+        isno = request.GET.get('isno')
         cursor = connection.cursor()
         raw_query = '''select ug.id, ug.isim, ug.adet
                     from 'ÜrünlerGrup Bilgileri' as ug
@@ -137,15 +149,15 @@ class urunTeslimViews(APIView):
                             and uh.id = (
                                     select uhs.id 
                                     from 'Ürün Hareketleri' as uhs 
-                                    where uhs.urun_id_id = uh.urun_id_id and uhs.per_isno_id = 22222
+                                    where uhs.urun_id_id = uh.urun_id_id and uhs.per_isno_id = %s
                                     order by uhs.tarih desc
                                     limit 1)
                     where (ug.mudurluk, ug.grup) In ( select mudurluk, grup
                                                 from Personeller  
-                                                where isno = 22222)
+                                                where isno = %s)
                             and (uh.per_isno_id is null
                             or ug.frekans <= cast(julianday('now') - julianday(uh.tarih) as integer))'''
-        return Response(cursor.execute(raw_query))
+        return Response(cursor.execute(raw_query, [isno, isno]))
 
 class urunHareketListCreateAPIView(generics.ListCreateAPIView):
     queryset = urunHareketlerM.objects.all()
