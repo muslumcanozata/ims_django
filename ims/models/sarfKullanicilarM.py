@@ -8,7 +8,6 @@ textLength = 255
 
 class sarfKullanicilarM(models.Model):
     isno = models.IntegerField(verbose_name='İş Numarası', primary_key=True, validators=[MaxValueValidator(99999), MinValueValidator(10000)], unique=True, null=False, blank=False)
-    password = models.CharField(verbose_name='Şifre', max_length=length, unique=True, null=False, blank=False)
     email = models.EmailField(verbose_name='Email Adresi', unique=True, null=False, blank=False)
     isim = models.CharField(verbose_name='İsim', max_length=length, null=False, blank=False)
     soyisim = models.CharField(verbose_name='Soyisim', max_length=length, null=False, blank=False)

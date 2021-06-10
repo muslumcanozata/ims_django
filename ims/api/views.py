@@ -81,12 +81,12 @@ class personellerListCreateAPIView(APIView):
 class personellerRFDetailsListCreateAPIView(generics.RetrieveUpdateAPIView):
     queryset = personellerM.objects.all()
     serializer_class = personellerSerializer
-    lookup_field = 'rfid2'
+    lookup_field = 'rfid'
 
 class personellerQRDetailsListCreateAPIView(generics.RetrieveUpdateAPIView):
     queryset = personellerM.objects.all()
     serializer_class = personellerSerializer
-    lookup_field = 'tel2'
+    lookup_field = 'tel'
 
 class personellerFaceDetailsListCreateAPIView(generics.RetrieveUpdateAPIView):
     queryset = personellerM.objects.all()

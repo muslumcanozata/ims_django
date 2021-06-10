@@ -7,8 +7,8 @@ urlpatterns = [
     path('sarfKullanicilar/', api_views.sarfKullanicilarListCreateAPIView.as_view(), name='Sarf Kullanıcılar Listesi'),
     path('sarfKullanicilar/<int:pk>', api_views.sarfKullanicilarDetailsListCreateAPIView.as_view(), name='Sarf Kullanıcılar Detay Listesi'),
     path('personeller/', api_views.personellerListCreateAPIView.as_view(), name="Personel Bilgileri"),
-    path('personellerQR/<int:tel2>/', api_views.personellerQRDetailsListCreateAPIView.as_view(), name="Personel Detay Bilgileri"),
-    path('personellerRF/<int:rfid2>/', api_views.personellerRFDetailsListCreateAPIView.as_view(), name="Urun Hareket Bilgileri"),
+    path('personellerQR/<int:tel>/', api_views.personellerQRDetailsListCreateAPIView.as_view(), name="Personel Detay Bilgileri"),
+    path('personellerRF/<slug:rfid>/', api_views.personellerRFDetailsListCreateAPIView.as_view(), name="Urun Hareket Bilgileri"),
     path('personellerFace/<int:isno>/', api_views.personellerFaceDetailsListCreateAPIView.as_view(), name="Urun Hareket Bilgileri"),
 
     path('urunTeslim/', api_views.urunTeslimViews.as_view(), name="Alınabilecek Ürün Bilgileri"),
