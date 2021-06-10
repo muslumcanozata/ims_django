@@ -2,9 +2,16 @@ import cv2
 import os
 
 
-face_cascade=cv2.CascadeClassifier("D:\\FACE_DETECT\\frontalface.xml")
-path = 'FaceImages'
+face_cascade=cv2.CascadeClassifier("ims/FACE_DETECT/frontalface.xml")
+path = 'ims/FACE_DETECT/FaceImages'
 
+
+def pkl_remove(file_name):
+    if os.path.exists(file_name):
+      os.remove(file_name)
+    else:
+      print("The file does not exist")
+      
 
 def create_folder(user):
     try:
@@ -64,11 +71,13 @@ def get_face_images(username):
         
     cap.release()
     cv2.destroyAllWindows()
+    return True
     
     
-username = input("Enter username: ")
-result = create_folder(username)
+def face_detect(username):
+    result = create_folder(username)
 
-if(result == True):
-    get_face_images(username);
-    
+    if(result == True):
+        pkl_remove("ims/FACE_DETECT/FaceImages/representations_dlib.pkl")
+        return get_face_images(username)
+

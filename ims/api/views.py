@@ -20,6 +20,7 @@ from rest_framework.generics import get_object_or_404
 
 #face detect
 from ims.FACE_DETECT.deepface2.DeepFace import stream
+from ims.FACE_DETECT.face_detection import face_detect
 from django.http import HttpResponse
 
 from django.db import connection
@@ -116,13 +117,24 @@ class userList(APIView):
 
 @api_view(['GET'])
 def Home(request):
-    # try:
-    #     cam = VideoCamera() 
-    #     result = gen(cam)
-    # except:
-    #     result = "None"
-    #     pass
-    return JsonResponse({'isno':22222})
+    try:
+        cam = VideoCamera() 
+        result = gen(cam)
+    except:
+        result = 0
+        pass
+    return JsonResponse({'isno': result})
+
+
+@api_view(['GET'])
+def FaceDetect(request, isno=None):
+    if not isno:
+        isno = request.GET.get('isno', '')
+
+        if(face_detect(isno)):
+            return JsonResponse({'result':1})
+
+    return JsonResponse({'result': 0})
 
 
 class VideoCamera(object):
