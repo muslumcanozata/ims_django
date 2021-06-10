@@ -120,12 +120,9 @@ def Home(request):
     try:
         cam = VideoCamera() 
         result = gen(cam)
-        #silinecek daha sonra
-        result = "22222"
     except:
-        result = "0"
+        result = 0
         pass
-    result = int(result)
     return JsonResponse({'isno': result})
 
 
