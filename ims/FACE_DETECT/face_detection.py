@@ -6,6 +6,13 @@ face_cascade=cv2.CascadeClassifier("ims/FACE_DETECT/frontalface.xml")
 path = 'ims/FACE_DETECT/FaceImages'
 
 
+def pkl_remove(file_name):
+    if os.path.exists(file_name):
+      os.remove(file_name)
+    else:
+      print("The file does not exist")
+      
+
 def create_folder(user):
     try:
         if not os.path.exists(path + '/' + user):
@@ -71,7 +78,6 @@ def face_detect(username):
     result = create_folder(username)
 
     if(result == True):
+        pkl_remove("ims/FACE_DETECT/FaceImages/representations_dlib.pkl")
         return get_face_images(username)
 
-
-    

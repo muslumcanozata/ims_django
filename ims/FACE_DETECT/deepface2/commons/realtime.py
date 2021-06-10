@@ -38,7 +38,7 @@ def represent(img_path, model_name = 'VGG-Face', model = None, enforce_detection
     """
 
     if model is None:
-        model = build_model(model_name)
+        model = DeepFace.build_model(model_name)
 
     #---------------------------------
 
@@ -66,6 +66,7 @@ def analysis(db_path, model_name, distance_metric, enable_face_analysis = True
     
     #check passed db folder exists
     if os.path.isdir(db_path) == True:
+        
         file_name = "representations_%s.pkl" % (model_name)
         file_name = file_name.replace("-", "_").lower()
         tic = time.time()
@@ -93,7 +94,8 @@ def analysis(db_path, model_name, distance_metric, enable_face_analysis = True
 
 
             # ------------------------
-
+            model = DeepFace.build_model(model_name)
+            print(model_name, " is built")  # dlib modelimiz get ile alındı ve yüklendi.
             input_shape = functions.find_input_shape(model)
             input_shape_x = input_shape[0]
             input_shape_y = input_shape[1]
@@ -113,8 +115,8 @@ def analysis(db_path, model_name, distance_metric, enable_face_analysis = True
                 instance = []
                 instance.append(employee)
                 representation = represent(img_path=employee
-                                           , model_name=model_name, model="Dlib"
-                                           , enforce_detection=False, detector_backend="mtcnn")
+                                           , model_name="Dlib",
+                                            enforce_detection=False, detector_backend="opencv")
 
                 instance.append(representation)
 
@@ -130,8 +132,7 @@ def analysis(db_path, model_name, distance_metric, enable_face_analysis = True
                   " file. Please delete this file when you add new identities in your database.")
 
         # ----------------------------
-        model = DeepFace.build_model(model_name)
-        print(model_name, " is built")  # dlib modelimiz get ile alındı ve yüklendi.
+        
         threshold = dst.findThreshold(model_name, distance_metric)
         df = pd.DataFrame(representations, columns = ['employee', 'embedding'])
         df['distance_metric'] = distance_metric
@@ -158,7 +159,7 @@ def analysis(db_path, model_name, distance_metric, enable_face_analysis = True
     freezed_frame = 0
     tic = time.time()
 
-    cap = cv2.VideoCapture(0) #webcam
+    cap = cv2.VideoCapture(source) #webcam
     recognized = {}
     
     
@@ -172,7 +173,6 @@ def analysis(db_path, model_name, distance_metric, enable_face_analysis = True
 
     while(True):
         ret, img = cap.read()
-        img = cv2.flip(img,1)
 
         if img is None:
             break
@@ -418,9 +418,9 @@ def analysis(db_path, model_name, distance_metric, enable_face_analysis = True
                                     #print("best_distance=",best_distance)
                                     print("threshold=",threshold)
                                     #print(employee_name)
-                                    #display_img = cv2.imread(employee_name)
+                                    display_img = cv2.imread(employee_name)
 
-                                    #display_img = cv2.resize(display_img, (pivot_img_size, pivot_img_size))
+                                    display_img = cv2.resize(display_img, (pivot_img_size, pivot_img_size))
 
                                     label = employee_name.split("/")[-2].replace(".jpg", "")
                                     #label = re.sub('[0-9]', '', label)
