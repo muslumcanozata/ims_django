@@ -7,8 +7,8 @@ from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from rest_framework.serializers import Serializer
 from django.contrib.auth.models import User
-from ims.models import sarfKullanicilarM
-from ims.api.serializers import personellerSerializer, sarfKullanicilarSerializer, urunHareketSerializer, urunlerGrupSerializer, userSerializer, userSerializerWithToken
+from ims.models import sarfKullanicilarM, istihkakM, mudurlukM
+from ims.api.serializers import personellerSerializer, sarfKullanicilarSerializer, urunHareketSerializer, urunlerGrupSerializer, userSerializer, userSerializerWithToken, istihkakMSerializer, mudurlukMSerializer
 #genericsAPIView
 from rest_framework.generics import GenericAPIView
 from rest_framework import generics
@@ -81,12 +81,12 @@ class personellerListCreateAPIView(APIView):
 class personellerRFDetailsListCreateAPIView(generics.RetrieveUpdateAPIView):
     queryset = personellerM.objects.all()
     serializer_class = personellerSerializer
-    lookup_field = 'rfid2'
+    lookup_field = 'rfid'
 
 class personellerQRDetailsListCreateAPIView(generics.RetrieveUpdateAPIView):
     queryset = personellerM.objects.all()
     serializer_class = personellerSerializer
-    lookup_field = 'tel2'
+    lookup_field = 'tel'
 
 class personellerFaceDetailsListCreateAPIView(generics.RetrieveUpdateAPIView):
     queryset = personellerM.objects.all()
@@ -174,3 +174,14 @@ class urunTeslimViews(APIView):
 class urunHareketListCreateAPIView(generics.ListCreateAPIView):
     queryset = urunHareketlerM.objects.all()
     serializer_class = urunHareketSerializer
+
+
+class GrupDetailsRetrieveUpdateAPIView(generics.RetrieveUpdateAPIView):
+    queryset = istihkakM.objects.all()
+    serializer_class = istihkakMSerializer
+    lookup_field = 'grup'
+
+class MudurlukDetailsRetrieveUpdateAPIView(generics.RetrieveUpdateAPIView):
+    queryset = mudurlukM.objects.all()
+    serializer_class = mudurlukMSerializer
+    lookup_field = 'mudurluk'
