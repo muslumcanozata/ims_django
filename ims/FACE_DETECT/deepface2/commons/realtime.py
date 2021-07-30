@@ -71,6 +71,7 @@ def analysis(db_path, model_name, distance_metric, enable_face_analysis = True
         file_name = file_name.replace("-", "_").lower()
         tic = time.time()
         if os.path.exists(db_path+"/"+file_name):
+            model = DeepFace.build_model(model_name)
             print("WARNING: Representations for images in ",db_path," folder were previously stored in ", file_name, ". If you added new instances after this file creation, then please delete this file and call find function again. It will create it again.")
             f = open(db_path+'/'+file_name, 'rb')
             representations = pickle.load(f)
