@@ -1,13 +1,10 @@
-from ims.models.urunHareketlerM import urunHareketlerM
-from ims.models.urunlerGrupM import urunlerGrupM
-from ims.models.personellerM import personellerM
 from django.http import HttpResponseRedirect
 from rest_framework import permissions, status
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from rest_framework.serializers import Serializer
 from django.contrib.auth.models import User
-from ims.models import sarfKullanicilarM, istihkakM, mudurlukM
+from ims.models import userM, rationM, directorateM, employeeM, givenProductM
 from ims.api.serializers import personellerSerializer, sarfKullanicilarSerializer, urunHareketSerializer, urunlerGrupSerializer, userSerializer, userSerializerWithToken, istihkakMSerializer, mudurlukMSerializer
 #genericsAPIView
 from rest_framework.generics import GenericAPIView
@@ -33,7 +30,7 @@ from django.http import JsonResponse
 
 class sarfKullanicilarListCreateAPIView(APIView):
     def get(self, request):
-        sarfKullanicilar = sarfKullanicilarM.objects.all()
+        sarfKullanicilar = userM.objects.all()
         serializer = sarfKullanicilarSerializer(sarfKullanicilar, many=True)
         return Response(serializer.data)
     
@@ -47,7 +44,7 @@ class sarfKullanicilarListCreateAPIView(APIView):
 class sarfKullanicilarDetailsListCreateAPIView(APIView):
     
     def get_object(self, pk):
-        sarfKullanicilar_instance = get_object_or_404(sarfKullanicilarM, pk=pk)
+        sarfKullanicilar_instance = get_object_or_404(userM, pk=pk)
         return sarfKullanicilar_instance
     
     def get(self, request, pk):
@@ -66,7 +63,7 @@ class sarfKullanicilarDetailsListCreateAPIView(APIView):
 
 class personellerListCreateAPIView(APIView):
     def get(self, request):
-        personeller = personellerM.objects.all()
+        personeller = employeeM.objects.all()
         serializer = personellerSerializer(personeller, many=True)
         return Response(serializer.data)
     
@@ -79,17 +76,17 @@ class personellerListCreateAPIView(APIView):
 
 
 class personellerRFDetailsListCreateAPIView(generics.RetrieveUpdateAPIView):
-    queryset = personellerM.objects.all()
+    queryset = employeeM.objects.all()
     serializer_class = personellerSerializer
     lookup_field = 'rfid'
 
 class personellerQRDetailsListCreateAPIView(generics.RetrieveUpdateAPIView):
-    queryset = personellerM.objects.all()
+    queryset = employeeM.objects.all()
     serializer_class = personellerSerializer
     lookup_field = 'tel'
 
 class personellerFaceDetailsListCreateAPIView(generics.RetrieveUpdateAPIView):
-    queryset = personellerM.objects.all()
+    queryset = employeeM.objects.all()
     serializer_class = personellerSerializer
     lookup_field = 'isno'
 
@@ -172,16 +169,16 @@ class urunTeslimViews(APIView):
         return Response(cursor.execute(raw_query, [isno, isno]))
 
 class urunHareketListCreateAPIView(generics.ListCreateAPIView):
-    queryset = urunHareketlerM.objects.all()
+    queryset = givenProductM.objects.all()
     serializer_class = urunHareketSerializer
 
 
 class GrupDetailsRetrieveUpdateAPIView(generics.RetrieveUpdateAPIView):
-    queryset = istihkakM.objects.all()
+    queryset = rationM.objects.all()
     serializer_class = istihkakMSerializer
     lookup_field = 'grup'
 
 class MudurlukDetailsRetrieveUpdateAPIView(generics.RetrieveUpdateAPIView):
-    queryset = mudurlukM.objects.all()
+    queryset = directorateM.objects.all()
     serializer_class = mudurlukMSerializer
     lookup_field = 'mudurluk'

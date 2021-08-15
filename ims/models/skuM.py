@@ -10,6 +10,6 @@ class skuM(models.Model):
         return self.ds
 
     class Meta:
-         db_table = "SKU Bilgileri"
+         db_table = "skuM"
          verbose_name_plural = "SKU Bilgileri"
          verbose_name = "SKU Bilgisi"

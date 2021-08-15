@@ -1,18 +1,18 @@
 from rest_framework import serializers
 from django.contrib.auth.models import User
 from rest_framework_jwt.settings import api_settings
-from ims.models import sarfKullanicilarM, personellerM, urunHareketlerM, istihkakM, mudurlukM
+from ims.models import userM, employeeM, givenProductM, rationM, directorateM
 
 class sarfKullanicilarSerializer(serializers.ModelSerializer):
     
     class Meta:
-        model = sarfKullanicilarM
+        model = userM
         fields = '__all__'
 
 class personellerSerializer(serializers.ModelSerializer):
     
     class Meta:
-        model = personellerM
+        model = employeeM
         fields = '__all__'
 
 class userSerializer(serializers.ModelSerializer):
@@ -48,24 +48,24 @@ class userSerializerWithToken(serializers.ModelSerializer):
 class urunlerGrupSerializer(serializers.ModelSerializer):
     
     class Meta:
-        model = personellerM
+        model = employeeM
         fields = '__all__'
 
 class urunHareketSerializer(serializers.ModelSerializer):
     
     class Meta:
-        model = urunHareketlerM
+        model = givenProductM
         fields = '__all__'
 
 
 class istihkakMSerializer(serializers.ModelSerializer):
     
     class Meta:
-        model = istihkakM
+        model = rationM
         fields = '__all__'
 
 class mudurlukMSerializer(serializers.ModelSerializer):
     
     class Meta:
-        model = mudurlukM
+        model = directorateM
         fields = '__all__'

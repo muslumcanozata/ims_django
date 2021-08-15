@@ -1,105 +1,115 @@
 from django.contrib import admin
 from ims.models import (
-    sarfKullanicilarM, personellerM, mudurlukM, butceKoduM, skuM, istihkakM, fiyatM, bedenlerM, urunlerGrupM, urunHareketlerM, istihkaklarGrupM
+    userM, employeeM, directorateM, budgetCodeM, skuM, rationM, priceM, sizeM, productGroupM, givenProductM, rationGroupM, pendingProductM
 )
 
 # Register your models here.
 
-@admin.register(sarfKullanicilarM)
-class sarfKullanicilarMAdmin(admin.ModelAdmin):
+@admin.register(userM)
+class userMAdmin(admin.ModelAdmin):
     search_fields = (
-        'isno', 'isim', 'soyisim', 'email', 'tel'
-        )
+        'isno', 'name', 'surname', 'email', 'tel'
+    )
     list_display = (
-        'isno', 'isim', 'soyisim', 'tel'
+        'isno', 'name', 'surname', 'email', 'tel'
     )
 
-@admin.register(personellerM)
-class personellerMAdmin(admin.ModelAdmin):
+@admin.register(employeeM)
+class employeeMAdmin(admin.ModelAdmin):
     search_fields = (
         'rfid',
     )
     list_display = (
-        'isno', 'isim', 'soyisim', 'email', 'tel', 'mudurluk', 'ilkamirlik'
+        'isno', 'name', 'surname', 'email', 'tel', 'directorate', 'manager'
     )
 
-@admin.register(mudurlukM)
-class mudurlukMAdmin(admin.ModelAdmin):
+@admin.register(directorateM)
+class directorateMAdmin(admin.ModelAdmin):
     search_fields = (
-        'mudurluk', 'm_isim'
-        )
+        'directorate', 'd_name'
+    )
     list_display = (
-        'm_isim', 'mudurluk'
+        'd_name', 'directorate'
     )
 
-@admin.register(butceKoduM)
-class butceKoduMAdmin(admin.ModelAdmin):
+@admin.register(budgetCodeM)
+class budgetCodeMAdmin(admin.ModelAdmin):
     search_fields = (
-        'kod','mudurluk', 'ds'
-        )
+        'code','directorate', 'ds'
+    )
     list_display = (
-        'kod','mudurluk', 'euro', 'ds'
+        'code','directorate', 'euro', 'ds'
     )
 
 @admin.register(skuM)
 class skuMAdmin(admin.ModelAdmin):
     search_fields = (
         'sku', 'ds'
-        )
+    )
     list_display = (
         'sku', 'ds'
     )
 
-@admin.register(istihkakM)
-class istihkakMAdmin(admin.ModelAdmin):
+@admin.register(rationM)
+class rationMAdmin(admin.ModelAdmin):
     search_fields = (
-        'grup', 'i_isim'
-        )
+        'group', 'r_name'
+    )
     list_display = (
-        'grup', 'i_isim'
+        'group', 'r_name'
     )
 
-@admin.register(fiyatM)
+@admin.register(priceM)
 class fiyatMAdmin(admin.ModelAdmin):
     search_fields = (
         'sku', 'euro', 'ds'
-        )
+    )
     list_display = (
         'sku', 'euro', 'ds'
     )
 
-@admin.register(bedenlerM)
-class bedenlerMAdmin(admin.ModelAdmin):
+@admin.register(sizeM)
+class sizeMAdmin(admin.ModelAdmin):
     search_fields = (
-        'isno', 'grup', 'beden'
-        )
+        'isno', 'group', 'size'
+    )
     list_display = (
-        'isno', 'grup', 'beden'
+        'isno', 'group', 'size'
     )
 
-@admin.register(urunlerGrupM)
-class urunlerGrupMAdmin(admin.ModelAdmin):
+@admin.register(productGroupM)
+class productGroupMAdmin(admin.ModelAdmin):
     search_fields = (
-        'isim',
-        )
+        'name',
+    )
     list_display = (
-        'isim', 'grup', 'istihkak', 'frekans', 'mudurluk', 'adet',
+        'name', 'group', 'frequency', 'directorate', 'piece', 'isRation',
     )
 
-@admin.register(urunHareketlerM)
-class urunHareketlerMAdmin(admin.ModelAdmin):
+@admin.register(givenProductM)
+class givenProductMAdmin(admin.ModelAdmin):
     search_fields = (
-        'per_isno', 'tarih', 'urun_id'
+        'emp_isno', 'date', 'product_id'
         )
     list_display = (
-        'per_isno', 'tarih', 'urun_id', 'verilenadet', 'istenilenadet', 'urun_id'
+        'emp_isno', 'date', 'product_id', 'given', 'desired', 'product_id'
     )
 
-@admin.register(istihkaklarGrupM)
-class istihkaklarGrupMAdmin(admin.ModelAdmin):
+@admin.register(pendingProductM)
+class pendingProductMAdmin(admin.ModelAdmin):
     search_fields = (
-        'sku', 'grup', 'beden', 'cinsiyet', 'frekans', 'mudurluk'
+        'emp_isno', 'date', 'product_id'
+        )
+    list_display = (
+        'emp_isno', 'date', 'product_id', 'desired', 'product_id'
+    )
+
+
+@admin.register(rationGroupM)
+class rationGroupMAdmin(admin.ModelAdmin):
+    search_fields = (
+        'sku', 'group', 'size', 'gender', 'frequency', 'directorate'
     )
     list_display = (
-        'sku', 'grup', 'urunGrup', 'beden', 'cinsiyet', 'frekans', 'mudurluk', 'ds'
+        'sku', 'group', 'productGroup', 'size', 'gender', 'frequency', 'directorate', 'ds'
     )
