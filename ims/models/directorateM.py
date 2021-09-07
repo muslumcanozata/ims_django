@@ -8,7 +8,7 @@ class directorateM(models.Model):
     directorate = models.IntegerField(verbose_name='Müdürlük No', unique= True, validators=[MinValueValidator(1), MaxValueValidator(100)], null=False, blank=False)
     d_name = models.CharField(verbose_name='Müdürlük İsmi', max_length=textLength, unique = True, null=False, blank = False)
     def __str__(self):
-        return self.m_isim
+        return self.d_name
     
     class Meta:
         db_table = "directorateM"

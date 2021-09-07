@@ -9,7 +9,7 @@ class productGroupM(models.Model):
     group = models.IntegerField(verbose_name='İstihkak Grubu', blank=True)
     piece = models.FloatField(verbose_name='Alınabilecek Adet', null=True, blank=False)
     directorate = models.IntegerField(verbose_name='Müdürlük No', validators=[MinValueValidator(1), MaxValueValidator(100)], blank=False)
-    frequency = models.BigIntegerField(verbose_name = "Frekans", validators=[MaxValueValidator(365), MinValueValidator(1)], blank=False)
+    frequency = models.BigIntegerField(verbose_name = "Frekans", validators=[MaxValueValidator(730), MinValueValidator(1)], blank=False)
     isRation = models.BooleanField(verbose_name='İstihkak Ürünü', default=False, null=False, blank=False)
     ds = models.CharField(verbose_name='Not', max_length=textLength, blank=True, null=True)
 
