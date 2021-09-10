@@ -1,6 +1,6 @@
 from django.contrib import admin
 from ims.models import (
-    userM, employeeM, directorateM, budgetCodeM, skuM, rationM, priceM, sizeM, productGroupM, givenProductM, rationGroupM, pendingProductM
+    userM, employeeM, directorateM, budgetCodeM, skuM, rationM, priceM, sizeM, productGroupM, givenProductM, rationGroupM, pendingProductM, itemTransactionsM, stocksM
 )
 
 # Register your models here.
@@ -112,4 +112,22 @@ class rationGroupMAdmin(admin.ModelAdmin):
     )
     list_display = (
         'sku', 'group', 'productGroup', 'size', 'gender', 'frequency', 'directorate', 'ds'
+    )
+
+@admin.register(itemTransactionsM)
+class itemTransactionsAdmin(admin.ModelAdmin):
+    search_fields = (
+        'sku', 'date',
+    )
+    list_display = (
+        'sku', 'amount', 'date', 'iotype', 'ds'
+    )
+
+@admin.register(stocksM)
+class stocksAdmin(admin.ModelAdmin):
+    search_fields = (
+        'sku',
+    )
+    list_display = (
+        'sku', 'amount', 'ds',
     )

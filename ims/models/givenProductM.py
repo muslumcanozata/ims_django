@@ -11,8 +11,8 @@ class givenProductM(models.Model):
 
     class Meta:
         db_table = "givenProductM"
-        verbose_name_plural = "Ürün Hareketleri"
-        verbose_name = "Ürün Hareketi"
+        verbose_name_plural = "Verilen Ürünler"
+        verbose_name = "Verilen Ürün"
 
     def __str__(self):
         return str(self.emp_isno)

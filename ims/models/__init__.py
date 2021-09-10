@@ -10,3 +10,5 @@ from .productGroupM import productGroupM
 from .givenProductM import givenProductM
 from .pendingProductM import pendingProductM
 from .rationM import rationM
+from .itemTransactionsM import itemTransactionsM
+from .stocksM import stocksM
